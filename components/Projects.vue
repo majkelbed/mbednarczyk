@@ -141,16 +141,17 @@ export default {
 
     .project-card {
         display: grid;
-        grid-template-rows: 2rem 1fr minmax(2rem auto);
+        grid-template-rows: 2rem 1fr minmax(2rem, auto);
         grid-row-gap: 1rem;
         row-gap: 1rem;
+        width: 100%;
         max-width: 100%;
         min-height: 18.43rem;
         padding: 1.5rem;
         background: $color-gray-800;
 
         @include media-breakpoint-up(lg) {
-            width: 32.43rem;
+            min-width: 32.43rem;
         }
 
         &_section {
