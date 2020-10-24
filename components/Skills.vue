@@ -4,13 +4,13 @@
             return {
                 skills: [
                     'svelte',
-                    'typescript',
                     'bootstrap',
-                    'webpack',
+                    'tailwind',
+                    'mysql',
+                    'php',
                     'react',
-                    'bootstrap',
-                    'webpack',
-                    'react'
+                    'typescript',
+                    'vue',
                 ]
             }
         },
@@ -41,18 +41,28 @@
         </div>
         <div class="circle-wrapper">
             <div class="circle"></div>
+        	<div class="blur"></div>
         </div>
     </div>
 </template>
 
 
-<style lang="scss">
+<style lang="scss" scoped>
     .skills {
-        grid-column: 7 / -1;
         position: relative;
         display: flex;
         justify-content: center;
     }
+
+	.blur {
+		position: absolute;
+		top: 50%;
+		left: -25%;
+		height: 75%;
+		width: 150%;
+		background: rgba(21, 21, 21, 0.36);
+		backdrop-filter: blur(40px);
+	}
 
     .halo {
         position: relative;

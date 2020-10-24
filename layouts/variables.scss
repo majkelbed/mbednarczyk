@@ -5,26 +5,42 @@ $color-gray-800: #1F1F1F;
 $color-gray-500: #515151;
 $color-white: #FFF;
 
-$font-xs: 12px;
-$line-height-xs: 16px;
+$font-xs: 0.75rem;
+$line-height-xs: 1rem;
 
-$font-sm: 14px;
-$line-height-sm: 18px;
+$font-sm: 0.875rem;
+$line-height-sm: 1.125rem;
 
-$font-md: 16px;
-$line-height-md: 21px;
+$font-md: 1rem;
+$line-height-md: 1.3rem;
 
-$font-lg: 18px;
-$line-height-lg: 32px;
+$font-lg: 1.125rem;
+$line-height-lg: 2rem;
 
-$font-xl: 21px;
-$line-height-xl: 25px;
+$font-xl: 1.3rem;
+$line-height-xl: 2.6rem;
 
-$font-2xl: 33px;
-$line-height-2xl: 43px;
+$font-2xl: 2.1rem;
+$line-height-2xl: 2.75rem;
 
-$font-4xl: 76px;
-$line-height-4xl: 95px;
+$font-3xl: 4.25rem;
+$line-height-3xl: 6.0rem;
 
-$font-5xl: 89px;
-$line-height-5xl: 108px;
+$font-4xl: 4.75rem;
+$line-height-4xl: 6.5rem;
+
+$font-5xl: 5rem;
+$line-height-5xl: 6rem;
+
+$breakpoints: (
+    'sm': '640px',
+    'md': '768px',
+    'lg': '1024px',
+    'xl': '1280px'
+);
+
+@mixin media-breakpoint-up($name) {
+    @media screen and (min-width: map-get($map: $breakpoints, $key: $name)){
+        @content;
+    }
+}

@@ -24,8 +24,8 @@ export default {
 </script>
 
 <template>
-    <nav class="nav" v-bind:class="{ 'nav--hidden': shouldNavHide }">
-        <span> / /\ michałbednarczyk </span>
+    <nav class="nav container" v-bind:class="{ 'nav--hidden': shouldNavHide }">
+        <span> majkelbed </span>
         <a class="link" href="#contact"> .contact me </a>
     </nav>
 </template>
@@ -33,7 +33,6 @@ export default {
 
 <style lang="scss" scoped>
 .nav {
-    grid-column: span 12;
     z-index: 50;
     position: fixed;
     top: 0;
@@ -41,14 +40,19 @@ export default {
     right: 0;
     display: flex;
     align-items: center;
-    max-width: 1280px;
     width: 100%;
     margin: 0 auto;
-    padding: 60px 0px;
-    background: var(--color-black);
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    background: $color-black;
     transition: transform 0.4s;
     transition-delay: 0.25s;
     transform-origin: top center;
+
+    @include media-breakpoint-up(lg) {
+        padding-top: 3.75rem;
+        padding-bottom: 3.75rem;
+    }
 
     &--hidden {
         transform: translateY(-100%);

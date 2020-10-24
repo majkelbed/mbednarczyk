@@ -17,7 +17,9 @@ export default {
 
   // Global CSS (https://go.nuxtjs.dev/config-css)
   css: [
-    '~layouts/variables.scss'
+    '~layouts/variables.scss',
+    '~layouts/font-face.css',
+    '~layouts/layout.scss',
   ],
 
   styleResources: {
@@ -47,7 +49,9 @@ export default {
   ],
 
   // Content module configuration (https://go.nuxtjs.dev/config-content)
-  content: {},
+  content: {
+    dir: 'content' // read content from my-content/
+  },
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)
   build: {
