@@ -1,3 +1,30 @@
+<script>
+export default {
+    data: () => ({
+        isSending: false,
+        wasSendSuccessfully: false
+    }),
+    methods: {
+        async handleFormSubmission(e) {
+            e.preventDefault();
+            this.isSending = true;
+            const formData = new FormData(e.target);
+            const res = await fetch('/', {
+                method: "POST",
+                body: formData
+            });
+            if(res.status === 200) {
+                this.wasSendSuccessfully = true;
+
+                setTimeout(() => {
+                    this.wasSendSuccessfully = false;
+                }, 1500)
+            }
+            this.isSending = false;
+        }
+    }
+}
+</script>
 <template>
     <section class="contact grid" id="contact">
         <div class="contact_heading-wrapper">
@@ -5,12 +32,35 @@
             <h3 class="contact_heading">CONTACT</h3>
             <h3 class="contact_heading text-stroke">CONTACT</h3>   
         </div>
-        <form class="contact_form form" action="" method="POST">
+        <form 
+            @submit="handleFormSubmission" 
+            class="contact_form form"
+            name="contact" 
+            action="/" 
+            method="POST"
+        >
             <label class="form_label" for="mail">Email:</label>
             <input class="form_input" type="email" name="mail" id="mail">
             <label class="form_label" for="message">Message:</label>
             <textarea class="form_input" name="message" id="message" cols="30" rows="5"></textarea>
-            <button class="form_submit-btn" type="submit">Send message</button>
+            <div class="form_submit">
+                <button 
+                    class="form_submit-btn btn"
+                    type="submit"
+                    v-bind:disabled="isSending || wasSendSuccessfully"
+                    ref="submitBtn"
+                >
+                    <span class="btn_messages" v-bind:class="wasSendSuccessfully ? 'alter' : ''">
+                        <span class="btn_message">
+                            Send message
+                        </span>
+                        <span class="btn_message">
+                            Message send!
+                        </span>
+                    </span>
+                </button>
+                <Spinner v-bind:isVisible="isSending" />
+            </div>
         </form>
     </section>
 </template>
@@ -61,6 +111,12 @@
             background: $color-black;
         }
 
+        &_submit {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
         &_submit-btn {
             width: 15rem;
             height: 3.25rem;
@@ -69,6 +125,36 @@
             font-size: $font-xl;
             line-height: $line-height-xl;
             background: $color-primary;
+        }
+    }
+    
+    .btn {
+        overflow: hidden;
+
+        &:disabled {
+            opacity: 0.9;
+            cursor: not-allowed;
+        }
+
+        &_messages {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 200%;
+            width: 100%;
+            transition: transform 0.35s ease-in-out;
+
+            &.alter {
+                transform: translateY(-50%);
+            }
+        }
+
+        &_message {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 50%;
         }
     }
 </style>
