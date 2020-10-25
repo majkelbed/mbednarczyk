@@ -2,23 +2,7 @@
 export default {
     props: [
         'projects'
-    ],
-    mounted() {
-        let startPosition = 0;
-        const instance = this.$refs.scrollbars.osInstance();
-        const handleDragScroll = (e) => {
-            instance.scroll({ x : `${ e.layerX - startPosition }px` });
-        }
-        
-        this.$refs.scroll.addEventListener('mousedown', (e) => {
-            console.log(e);
-            startPosition = e.layerX;
-            this.$refs.scroll.addEventListener('mousemove', handleDragScroll);
-        });
-        document.body.addEventListener('mouseup', (e) => {
-            this.$refs.scroll.removeEventListener('mousemove', handleDragScroll);
-        });
-    }
+    ]
 }
 </script>
 <template>
