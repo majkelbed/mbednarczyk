@@ -37,8 +37,9 @@ export default {
             class="contact_form form"
             data-netlify="true"
             name="contact" 
-            action="/" 
+            action="/contact" 
             method="POST"
+            enctype="multipart/form-data"
         >
             <label class="form_label" for="mail">Email:</label>
             <input class="form_input" type="email" name="mail" id="mail">
