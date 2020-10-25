@@ -2,7 +2,23 @@
 export default {
     props: [
         'projects'
-    ]
+    ],
+    mounted() {
+        let startPosition = 0;
+        const instance = this.$refs.scrollbars.osInstance();
+        const handleDragScroll = (e) => {
+            instance.scroll({ x : `${ e.layerX - startPosition }px` });
+        }
+        
+        this.$refs.scroll.addEventListener('mousedown', (e) => {
+            console.log(e);
+            startPosition = e.layerX;
+            this.$refs.scroll.addEventListener('mousemove', handleDragScroll);
+        });
+        document.body.addEventListener('mouseup', (e) => {
+            this.$refs.scroll.removeEventListener('mousemove', handleDragScroll);
+        });
+    }
 }
 </script>
 <template>
@@ -13,34 +29,39 @@ export default {
             <h2 class="projects_heading text-gradient">PROJECTS</h2>
         </div>
         <div class="projects_group-wrapper left-container">
-            <div class="projects_group">
-                <article class="project-card" v-for="(project, index) in projects" :key="index">
-                    <section class="project-card_section title">
-                        <p class="section-title">NAME</p>
-                        <h3 class="project-title">
-                            {{project.title}}
-                        </h3>
-                    </section>
-                    <section class="project-card_section description">
-                        <p class="section-title">DESCRIPTION</p>
-                        <p class="project-description">
-                            {{project.description}}
-                        </p>
-                    </section>
-                    <section class="project-card_section tech">
-                        <p class="section-title">TECH</p>
-                        <p class="project-stack">
-                            {{project.tech}}
-                        </p>
-                        <a class="project-link" v-bind:href="project.link" target="_blank">
-                            Website
-                            <span class="link-icon">
-                                <img src="/media/link.svg" alt="Link icon">
-                            </span>
-                        </a>
-                    </section>
-                </article>
-            </div>
+            <overlay-scrollbars
+                :options="{ scrollbars: { autoHide: 'move' } }"
+                ref="scrollbars"
+            >
+                <div class="projects_group" ref="scroll">
+                    <article class="project-card" v-for="(project, index) in projects" :key="index">
+                        <section class="project-card_section title">
+                            <p class="section-title">NAME</p>
+                            <h3 class="project-title">
+                                {{project.title}}
+                            </h3>
+                        </section>
+                        <section class="project-card_section description">
+                            <p class="section-title">DESCRIPTION</p>
+                            <p class="project-description">
+                                {{project.description}}
+                            </p>
+                        </section>
+                        <section class="project-card_section tech">
+                            <p class="section-title">TECH</p>
+                            <p class="project-stack">
+                                {{project.tech}}
+                            </p>
+                            <a class="project-link" v-bind:href="project.link" target="_blank">
+                                Website
+                                <span class="link-icon">
+                                    <img src="/media/link.svg" alt="Link icon">
+                                </span>
+                            </a>
+                        </section>
+                    </article>
+                </div>
+            </overlay-scrollbars>
         </div>
     </section>
 </template>

@@ -34,6 +34,7 @@ export default {
 
   // Global CSS (https://go.nuxtjs.dev/config-css)
   css: [
+    './node_modules/overlayscrollbars/css/OverlayScrollbars.css',
     '~layouts/variables.scss',
     '~layouts/font-face.css',
     '~layouts/layout.scss',
@@ -45,6 +46,7 @@ export default {
 
   // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
   plugins: [
+    {src: '@/plugins/vue-overlayscrollbars.client.js', mode: 'client'}
   ],
 
   // Auto import components (https://go.nuxtjs.dev/config-components)
