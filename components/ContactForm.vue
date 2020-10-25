@@ -10,7 +10,7 @@ export default {
             this.isSending = true;
 
             const formData = new FormData(e.target);
-            const res = await fetch('/', {
+            const res = await fetch('/contact', {
                 method: "POST",
                 body: formData
             });
@@ -35,6 +35,7 @@ export default {
         <form 
             @submit="handleFormSubmission" 
             class="contact_form form"
+            data-netlify="true"
             name="contact" 
             action="/" 
             method="POST"
@@ -66,6 +67,8 @@ export default {
                 </button>
                 <Spinner v-bind:isVisible="isSending" />
             </div>
+
+            <input type="hidden" name="form-name" value="contact">
         </form>
     </section>
 </template>
