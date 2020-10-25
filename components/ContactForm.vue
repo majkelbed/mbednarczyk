@@ -2,24 +2,24 @@
 export default {
     data: () => ({
         isSending: false,
-        wasSendSuccessfully: false
+        formSubmissionStatus: ""
     }),
     methods: {
         async handleFormSubmission(e) {
             e.preventDefault();
             this.isSending = true;
+
             const formData = new FormData(e.target);
             const res = await fetch('/', {
                 method: "POST",
                 body: formData
             });
-            if(res.status === 200) {
-                this.wasSendSuccessfully = true;
 
-                setTimeout(() => {
-                    this.wasSendSuccessfully = false;
-                }, 1500)
-            }
+            this.formSubmissionStatus = res.status === 200 ? "succeed" : "failed";
+            setTimeout(() => {
+                this.formSubmissionStatus = "";
+            }, 1500);
+
             this.isSending = false;
         }
     }
@@ -47,10 +47,15 @@ export default {
                 <button 
                     class="form_submit-btn btn"
                     type="submit"
-                    v-bind:disabled="isSending || wasSendSuccessfully"
+                    v-bind:disabled="isSending || formSubmissionStatus !== ''"
                     ref="submitBtn"
                 >
-                    <span class="btn_messages" v-bind:class="wasSendSuccessfully ? 'alter' : ''">
+                    <span class="btn_messages" 
+                        v-bind:class="formSubmissionStatus"
+                    >
+                        <span class="btn_message small">
+                            Ooops, failed to send :(
+                        </span>
                         <span class="btn_message">
                             Send message
                         </span>
@@ -118,8 +123,9 @@ export default {
         }
 
         &_submit-btn {
-            width: 15rem;
+            min-width: 15rem;
             height: 3.25rem;
+            padding: 0 1rem;
             color: $color-black;
             font-weight: 600;
             font-size: $font-xl;
@@ -141,12 +147,17 @@ export default {
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            height: 200%;
+            height: 300%;
             width: 100%;
             transition: transform 0.35s ease-in-out;
+            transform: translateY(-33.3333%);
 
-            &.alter {
-                transform: translateY(-50%);
+            &.succeed {
+                transform: translateY(-66.6666%);
+            }
+
+            &.failed {
+                transform: translateY(0%);
             }
         }
 
@@ -154,7 +165,12 @@ export default {
             display: flex;
             align-items: center;
             justify-content: center;
-            height: 50%;
+            height: 33.3333%;
+
+            &.small {
+                font-size: $font-lg;
+                line-height: $line-height-lg;
+            }
         }
     }
 </style>
