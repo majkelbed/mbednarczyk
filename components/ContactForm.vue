@@ -42,9 +42,9 @@ export default {
             enctype="multipart/form-data"
         >
             <label class="form_label" for="mail">Email:</label>
-            <input class="form_input" type="email" name="mail" id="mail">
+            <input class="form_input" type="email" name="mail" id="mail" placeholder="joe@example.com" required>
             <label class="form_label" for="message">Message:</label>
-            <textarea class="form_input" name="message" id="message" cols="30" rows="5"></textarea>
+            <textarea class="form_input" name="message" id="message" cols="30" rows="5" placeholder="Hey, I have project idea, would you help me?" required></textarea>
             <div class="form_submit">
                 <button 
                     class="form_submit-btn btn"
