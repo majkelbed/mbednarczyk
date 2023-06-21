@@ -14,7 +14,7 @@
     "@nuxt/content": "^1.9.0",
     "@nuxtjs/pwa": "^3.0.2",
     "core-js": "^3.6.5",
-    "nuxt": "^2.14.6",
+    "nuxt": "^3.4.3",
     "overlayscrollbars": "^1.13.0",
     "overlayscrollbars-vue": "^0.2.2"
   },
